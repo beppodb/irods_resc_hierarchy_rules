@@ -1,0 +1,1 @@
+# irods_resc_hierarchy_rules
