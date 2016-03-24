@@ -41,7 +41,10 @@ pep_resource_resolve_hierarchy_pre(*INST_NAME,*CTX,*OUT,*OP_TYPE,*HOST,*RESC_HIE
 
           *SOURCE_LPATH = ""; 
           *THIS_LPATH = *CTX.logical_path;
-          *THIS_METADATA = split(*CTX.metadataIncluded, ";");
+          if(0 != errorcode(*MD = *CTX.metadataIncluded)) {
+            *MD = "";
+          }
+          *THIS_METADATA = split(*MD, ";");
           for( *I = 0; *I<size(*THIS_METADATA); *I = *I + 3) {
             *ATTR = elem( *THIS_METADATA, *I );
             writeLine("serverLog", "pep_resource_resolve_hierarchy_pre - attr *ATTR in sidecar metadata");
